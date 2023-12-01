@@ -8,6 +8,7 @@ import (
 )
 
 func findFirstDigit(line string) (string, error) {
+	// returns the first digit found in a string
 	for _, char := range line {
 		if unicode.IsDigit(char) {
 			return string(char), nil
@@ -17,6 +18,7 @@ func findFirstDigit(line string) (string, error) {
 }
 
 func reverse(s string) string {
+	// reverses a string
 	runes := []rune(s)
 	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
 		runes[i], runes[j] = runes[j], runes[i]
@@ -25,6 +27,7 @@ func reverse(s string) string {
 }
 
 func getLineDoubleDigit(line string) (int, error) {
+	// concatenates the first and last digit of a string and returns the number
 	firstDigit, err := findFirstDigit(line)
 	if err != nil {
 		return 0, err
@@ -43,6 +46,7 @@ func getLineDoubleDigit(line string) (int, error) {
 }
 
 func GetSumOfDoubleDigit(data []string) (int, error) {
+	// returns the sum of all double digits in a slice of strings
 	var sum int
 
 	for _, line := range data {
@@ -59,6 +63,7 @@ func GetSumOfDoubleDigit(data []string) (int, error) {
 // ----- Part 2 -----
 
 func applyDigitMapping(line string, mapping map[string]string) string {
+	// applies the digit mapping to a single line
 	for key, value := range mapping {
 		if len(key) > 0 {
 			firstChar := string(key[0])
@@ -71,6 +76,7 @@ func applyDigitMapping(line string, mapping map[string]string) string {
 }
 
 func ConvertDataToDigitMap(data []string, mapping map[string]string) []string {
+	// applies the digit mapping to a slice of strings
 	var convertedData []string
 	for _, line := range data {
 		convertedData = append(convertedData, applyDigitMapping(line, mapping))
