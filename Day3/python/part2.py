@@ -3,7 +3,7 @@ import re
 import string
 import logging
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 
 def get_star_positions(line: str) -> list:
@@ -35,7 +35,6 @@ def find_valid_stars(
     result = 0
 
     for star in positions:
-        print(star)
         valid_items = []
         for item in prev_line_ind:
             if star in range(item[0] - 1, item[1] + 1):
@@ -52,11 +51,10 @@ def find_valid_stars(
                 valid_items.append(next_line[item[0] : item[1]])
                 break
 
-        print(f"valid_items: {valid_items} for star at index {star} on line {index}")
         if len(valid_items) == 2:
             result += int(valid_items[0]) * int(valid_items[1])
             logging.debug(
-                f"{valid_items[0]} * {valid_items[1]} = {result} for star at index {star} on line {index}"
+                f"{valid_items[0]} * {valid_items[1]} = {result} for star at index {star} on line {index-1}"
             )
 
     return result
@@ -69,7 +67,6 @@ if __name__ == "__main__":
 
     for i, item in enumerate(data):
         positions = get_star_positions(item)
-        print(positions)
         if positions == []:
             continue
 
